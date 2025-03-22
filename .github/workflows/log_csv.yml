@@ -1,0 +1,34 @@
+name: Daily Exchange Logger from Wise
+
+on:
+  schedule:
+    - cron: '0 7 * * *'  # كل يوم الساعة 7 صباحًا UTC
+  workflow_dispatch:
+
+jobs:
+  log-to-csv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Run the script
+        run: python log_to_csv.py
+
+      - name: Commit and push the updated CSV
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add exchange_rates.csv
+          git commit -m "Add daily exchange rate"
+          git push
