@@ -1,1 +1,1 @@
-# dollar_rates
+# dollar rates
