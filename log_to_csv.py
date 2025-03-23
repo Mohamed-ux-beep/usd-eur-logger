@@ -29,7 +29,7 @@ if amount_span:
         usd_raw = match.group(1)
         eur_raw = match.group(2)
 
-        usd_value = usd_raw.replace(",", "") 
+        usd_value = 1
         eur_value = eur_raw.replace(",", ".")
 
         date_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
